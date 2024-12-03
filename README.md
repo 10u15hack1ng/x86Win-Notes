@@ -2,7 +2,7 @@
 
 Pattern generation:
 ```
-$ msf-pattern_offset -l 800
+$ msf-pattern_create -l 800
 $ msf-pattern_offset -l 800 -q 42306142
 ```
 
