@@ -36,7 +36,7 @@ we can find the offset to the PE header by dumping the DWORD at offset 0x3C from
 0:077> ? libeay32IBM019 + 1000
 Evaluate expression: 52367360 = 031f1000
 ```
-Use the !address command to collect information about the code section.
+Use the !address or !vprot command to collect information about the code section.
 ```
 0:077> !address 031f1000
 Usage: Image
