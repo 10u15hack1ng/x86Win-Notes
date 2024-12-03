@@ -76,3 +76,6 @@ Allocation Base: 031f0000
 Allocation Protect: 00000080 PAGE_EXECUTE_WRITECOPY
 ```
 Alternative: Use Pykd code caver: https://github.com/nop-tech/code_caver
+```
+!py C:\Users\admin\Desktop\code_caver.py <startAddress> <endAddress>
+```
