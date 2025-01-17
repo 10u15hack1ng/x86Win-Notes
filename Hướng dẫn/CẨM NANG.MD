@@ -2,14 +2,14 @@
 
 ## Bài 1:
 
-B1: Xác nhận code POC overflow của hãng
-B2: Tìm điểm overflow (offset)
-B3: Tìm bad characters (ghi lại)
-B4: Tìm module có thể khai thác được (module không có ASLR)
-B5: Tìm API có thể khai thác được (Có thể là VirtualAlloc hoặc là WPM)
-B6: Tìm ROP gadgets để vượt qua DEP
-B7: Xây dựng stack dùng ROP gadget
-B8: Tạo shellcode thủ công
+B1: Xác nhận code POC overflow của hãng \
+B2: Tìm điểm overflow (offset)  \
+B3: Tìm bad characters (ghi lại) \
+B4: Tìm module có thể khai thác được (module không có ASLR) \
+B5: Tìm API có thể khai thác được (Có thể là VirtualAlloc hoặc là WPM) \
+B6: Tìm ROP gadgets để vượt qua DEP \
+B7: Xây dựng stack dùng ROP gadget \
+B8: Tạo shellcode thủ công \
 
 
 ## Bài 2:
