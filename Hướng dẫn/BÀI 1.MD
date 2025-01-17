@@ -10,16 +10,16 @@ B2: Tìm điểm overflow (offset)
 # Chụp lại các bước
 
 # Tạo ra pattern duy nhất để tìm điểm overflow 
-$ msf-pattern_create -l 800
+msf-pattern_create -l 800
 
 # Tìm điểm offset sau khi xác định overflow
-$ msf-pattern_offset -l 800 -q <Giá trị EIP>
-VD: $ msf-pattern_offset -l 800 -q 42306142
+msf-pattern_offset -l 800 -q <Giá trị EIP>
+VD: msf-pattern_offset -l 800 -q 42306142
 ```
 
 B3: Tìm bad characters (ghi lại)
 ```
-# Mẫu badchars của python. Chụp sơ bộ không cần chi tiết.
+# Mẫu badchars của python (Copy vào trong code). Chụp sơ bộ không cần chi tiết.
 badchars = (
   "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10"
   "\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x20"
@@ -43,16 +43,31 @@ badchars = (
 B4: Tìm module có thể khai thác được (module không có ASLR) \
 ```
 # Sử dụng narly để xem các modules và cơ chế bảo mật của chúng
-# Trong WinDBG của máy Debug sử dụng các lệnh:
+# Trong WinDBG của máy Debug sử dụng các lệnh và chụp lại:
 
 .load narly 
 
 !nmod
 
-# Khi đó tìm module nào không có *ASLR (Khi thi chỉ có đúng 1 cái 
+# Khi đó tìm module nào không có *ASLR (Khi thi chỉ có đúng 1 cái)
 ```
 
 B5: Tìm API có thể khai thác được (Có thể là VirtualAlloc hoặc là WPM) \
+```
+# Dựa trên output của !nmod để lấy tên module
+# Trong WinDBG của máy Debug sử dụng các lệnh và chụp lại:
+
+# Tìm địa chỉ của Import Address Table
+!dh <tên module> -f
+VD: !dh KERNEL32 -f
+
+# Khi đó để ý hàng Import Address Table Directory
+# Cột thứ nhất là địa chỉ bắt đầu, cột thứ 2 là size (VD: 1234 [ 2c] 
+dps <tên module>+1234 <tên module>+1234+2c
+VD: dps KERNEL32+1234 KERNEL32+1234+2c
+```
+
+
 B6: Tìm ROP gadgets để vượt qua DEP \
 B7: Xây dựng stack dùng ROP gadget \
 B8: Tạo shellcode thủ công
