@@ -58,11 +58,13 @@ B5: Tìm API có thể khai thác được (Có thể là VirtualAlloc hoặc l�
 # Trong WinDBG của máy Debug sử dụng các lệnh và chụp lại:
 
 # Tìm địa chỉ của Import Address Table
+
 !dh <tên module> -f
 VD: !dh KERNEL32 -f
 
 # Khi đó để ý hàng Import Address Table Directory
 # Cột thứ nhất là địa chỉ bắt đầu, cột thứ 2 là size (VD: 1234 [ 2c] 
+
 dps <tên module>+1234 <tên module>+1234+2c
 VD: dps KERNEL32+1234 KERNEL32+1234+2c
 ```
