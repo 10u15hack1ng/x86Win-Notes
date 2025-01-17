@@ -1,5 +1,7 @@
 # x86Win-OSED-Notes
 
+### [Cẩm nang đi thi](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/H%C6%B0%E1%BB%9Bng%20d%E1%BA%ABn/C%E1%BA%A8M%20NANG.MD)
+
 # Pattern generation:
 ```
 $ msf-pattern_create -l 800
