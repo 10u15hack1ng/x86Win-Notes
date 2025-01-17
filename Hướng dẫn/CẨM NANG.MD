@@ -13,8 +13,10 @@ Chỉ cần chạy thử và không cần phải chụp
 B2: Tìm điểm overflow (offset) 
 ```
 # Chụp lại các bước
+
 # Tạo ra pattern duy nhất để tìm điểm overflow 
 $ msf-pattern_create -l 800
+
 # Tìm điểm offset sau khi xác định overflow
 $ msf-pattern_offset -l 800 -q <Giá trị EIP>
 VD: $ msf-pattern_offset -l 800 -q 42306142
