@@ -16,8 +16,8 @@ buffer = overflowfiller + functionstack + eip + ROPchain + NOPs + shellcode
 ## Xây dựng stack mẫu
 VirtualAlloc:
 ```
-functionAddress = b"AAAA"       # VirtualAllocStub address
-shellcodeAddress = b"BBBB"      # Shellcode address
+functionAddress = b"AAAA"           # VirtualAllocStub address
+shellcodeAddress = b"BBBB"          # Shellcode address
 parameter1 = b"CCCC"                # lpAddress             # shellcode address
 parameter2 = b"DDDD"                # dwSize
 parameter3 = b"EEEE"                # flAllocationType
@@ -60,6 +60,7 @@ ROP += p32(0x12345678)    # add eax, ecx ; pop esi ; pop ebx ; ret ;
 ROP += b"AAAA"            # Bù 1 pop
 ROP += b"AAAA"            # Bù 1 pop
 ```
+
 Để debug trong quá trình xây dựng ROPchain, có thể sử dụng WinDBG với lệnh đặt breakpoint thủ công
 ```
 bp <địa chỉ trong memory>
@@ -70,5 +71,20 @@ ROP += p32(0x12345678)    # pop eax ; ret ;
 # Thì có thể đặt breakpoint như sau:
 bp 0x12345678
 ```
+
+Có thể kiểm tra xem các giá trị được lưu với lệnh `dds <địa chỉ>`
+```
+# VD: Chúng ta lưu esp vào thanh ghi esi và hiện tại esi đang dừng tại giá trị của functionaddress sau khi đã ghi đè
+
+dds esi L4
+
+# Output sẽ là đoạn địa chỉ và giá trị tương ứng. Bên phải sẽ là giá trị đã disassemble, ở đây nếu các hàm có sẵn symbol trong windows thì sẽ được giải mã thành tên các hàm tương ứng (VD: VirtualAllocStub, WriteProcessMemory...)
+```
+
+## Trả lại con trỏ về đầu stack và khôi phục esp
+Sau khi đã xây dựng xong stack với những giá trị đúng, ta sẽ dùng các gadget để lùi con trỏ (hiện đang lưu trên thanh ghi đã chọn từ trước) lại về trước stack.
+Khi con trỏ đã về đầu stack thì chúng ta sẽ dùng các gadget tương tự như ở bước lưu lại thanh ghi esp để trả lại giá trị của con trỏ về esp.
+Có thể sử dụng lệnh `dds esp` để kiểm tra stack đã chứa những giá trị đúng ở bước này.
+
 
 
