@@ -1,5 +1,5 @@
 # Bài 2:
-[Các template các hàm](https://github.com/Cl0wnK1n9/ShellcodeTemplate-windowx86/tree/main/Functions)  \
+[Các template các hàm](https://github.com/Cl0wnK1n9/ShellcodeTemplate-windowx86/tree/main/Functions)  
 
 Để load DLL thì đổi sang ASCII sang hex (Lưu ý trong code viết bytes theo chiều ngược lại) \
 Để load API thì tính hash: \
