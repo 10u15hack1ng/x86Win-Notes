@@ -96,8 +96,11 @@ dd <Địa chỉ bắt đầu muốn ghi viết shellcode> + <Size shellcode (c�
 # Nếu output trả về vẫn là 1 vùng chứa bytes rỗng (00000000) thì nghĩa là đủ size dùng được.
 ```
 
-B6: Tìm ROP gadgets để vượt qua DEP \
+## B6: Tìm ROP gadgets để vượt qua DEP \
+
+
+## B7: Xây dựng stack dùng ROP gadget \
 [Cách xây dựng ROP](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/H%C6%B0%E1%BB%9Bng%20d%E1%BA%ABn/X%C3%A2y%20d%E1%BB%B1ng%20ROP.MD)
 
-B7: Xây dựng stack dùng ROP gadget \
-B8: Tạo shellcode thủ công
+## B8: Tạo shellcode thủ công
+[Shellcode mẫu trong sách](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/Custom%20Shellcode/shellcode_NO_CHANGE_PLEASE.py)
