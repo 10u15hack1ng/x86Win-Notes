@@ -40,7 +40,7 @@ badchars = (
 )
 ```
 
-## B4: Tìm module có thể khai thác được (module không có ASLR) \
+## B4: Tìm module có thể khai thác được (module không có ASLR) 
 ```
 # Sử dụng narly để xem các modules và cơ chế bảo mật của chúng
 # Trong WinDBG của máy Debug sử dụng các lệnh và chụp lại:
@@ -52,7 +52,7 @@ badchars = (
 # Khi đó tìm module nào không có *ASLR (Khi thi chỉ có đúng 1 cái)
 ```
 
-## B5: Tìm API có thể khai thác được (Có thể là VirtualAlloc hoặc là WPM) \
+## B5: Tìm API có thể khai thác được (Có thể là VirtualAlloc hoặc là WPM) 
 ### 5.1: Tìm API
 ```
 # Dựa trên output của !nmod để lấy tên module
@@ -96,10 +96,19 @@ dd <Địa chỉ bắt đầu muốn ghi viết shellcode> + <Size shellcode (c�
 # Nếu output trả về vẫn là 1 vùng chứa bytes rỗng (00000000) thì nghĩa là đủ size dùng được.
 ```
 
-## B6: Tìm ROP gadgets để vượt qua DEP \
+## B6: Tìm ROP gadgets để vượt qua DEP 
+```
+# Sử dụng rp-win-x86 để trích xuất ROP gadgets từ module cần khai thác
+# Sử dụng narly trong WinDBG để tìm đường dẫn của module khai thác
+.load narly
+!nmod
 
+# Đường dẫn là cột cuối cùng trong output của lệnh !nmod
+# Trích xuất ROP chain bằng lệnh sau:
+rp_win_x86.exe -f "<Đường dẫn đến moduled" -r 5 > rop.txt
+```
 
-## B7: Xây dựng stack dùng ROP gadget \
+## B7: Xây dựng stack dùng ROP gadget 
 [Cách xây dựng ROP](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/H%C6%B0%E1%BB%9Bng%20d%E1%BA%ABn/X%C3%A2y%20d%E1%BB%B1ng%20ROP.MD)
 
 ## B8: Tạo shellcode thủ công
