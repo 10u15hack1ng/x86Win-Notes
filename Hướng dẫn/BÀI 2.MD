@@ -1,4 +1,5 @@
 # Bài 2:
+Lưu ý chụp lại các đoạn có IP của máy Debug sau khi đã khai thác thành công để làm minh chứng.
 [Các template các hàm](https://github.com/Cl0wnK1n9/ShellcodeTemplate-windowx86/tree/main/Functions)  
 
 Để load DLL thì đổi sang ASCII sang hex (Lưu ý trong code viết bytes theo chiều ngược lại) \
