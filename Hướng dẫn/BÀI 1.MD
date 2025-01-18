@@ -1,11 +1,11 @@
 # Bài 1:
 
-B1: Xác nhận code POC overflow
+## B1: Xác nhận code POC overflow
 ```
 Chỉ cần chạy thử và không cần phải chụp
 ```
 
-B2: Tìm điểm overflow (offset) 
+## B2: Tìm điểm overflow (offset) 
 ```
 # Chụp lại các bước
 
@@ -17,7 +17,7 @@ msf-pattern_offset -l 800 -q <Giá trị EIP>
 VD: msf-pattern_offset -l 800 -q 42306142
 ```
 
-B3: Tìm bad characters (ghi lại)
+## B3: Tìm bad characters (ghi lại)
 ```
 # Mẫu badchars của python (Copy vào trong code). Chụp sơ bộ không cần chi tiết.
 badchars = (
@@ -40,7 +40,7 @@ badchars = (
 )
 ```
 
-B4: Tìm module có thể khai thác được (module không có ASLR) \
+## B4: Tìm module có thể khai thác được (module không có ASLR) \
 ```
 # Sử dụng narly để xem các modules và cơ chế bảo mật của chúng
 # Trong WinDBG của máy Debug sử dụng các lệnh và chụp lại:
@@ -52,7 +52,8 @@ B4: Tìm module có thể khai thác được (module không có ASLR) \
 # Khi đó tìm module nào không có *ASLR (Khi thi chỉ có đúng 1 cái)
 ```
 
-B5: Tìm API có thể khai thác được (Có thể là VirtualAlloc hoặc là WPM) \
+## B5: Tìm API có thể khai thác được (Có thể là VirtualAlloc hoặc là WPM) \
+### 5.1: Tìm API
 ```
 # Dựa trên output của !nmod để lấy tên module
 # Trong WinDBG của máy Debug sử dụng các lệnh và chụp lại:
@@ -63,13 +64,40 @@ B5: Tìm API có thể khai thác được (Có thể là VirtualAlloc hoặc l�
 VD: !dh KERNEL32 -f
 
 # Khi đó để ý hàng Import Address Table Directory
-# Cột thứ nhất là địa chỉ bắt đầu, cột thứ 2 là size (VD: 1234 [ 2c] 
+# Cột thứ nhất là địa chỉ bắt đầu, cột thứ 2 là size (VD: 1234 [ 2c] )
 
 dps <tên module>+1234 <tên module>+1234+2c
 VD: dps KERNEL32+1234 KERNEL32+1234+2c
+
+# Output sẽ là 1 list nơi lưu địa chỉ của các API mà module gọi đến. Tìm WriteProcessMemoryStub (Theo yêu cầu của đề bài)
+# Ghi lại nơi lưu địa chỉ của API WriteProcessMemoryStub (Cột đầu tiên tương ứng với dòng)
+```
+### 5.2: Khi khai thác WriteProcessMemory thì cần phải tìm code cave (Một vùng bộ nhớ chứa bytes rỗng có quyền thực thi)
+```
+# Trong WinDBG của máy Debug sử dụng các lệnh và chụp lại:
+
+!address
+# VD output: 412000  413000  1000  MEM_IMAGE  MEM_COMMIT  PAGE_EXECUTE_READ      IMAGE      [KERNEL32; ........]
+
+# Output của lệnh trên sẽ liệt kê tất cả vùng của các module.
+# Chúng ta quan tâm đến các vùng trong module sẽ khai thác (Tên module thể hiện ở cột cuối).
+# Trong module sẽ khai thác, để ý vùng có chữ PAGE_EXECUTE_READ.
+# Lưu ý lại 2 cột đầu là địa chỉ bắt đầu và kết thúc của vùng.
+
+s <Địa chỉ bắt đầu của vùng> <Địa chỉ kết thúc của vùng> 00000000
+VD: s 412000 413000 00000000
+
+# Lệnh trên dùng để tìm 1 vùng chứa bytes rỗng trong 1 khoảng chúng ta chỉ định (Vùng có PAGE_EXECUTE_READ đã tìm ở trên)
+# Output của lệnh sẽ ra rất nhiều. Chụp 1 đoạn có rất nhiều số 0000000 là được.
+# Có thể kiểm tra xem vùng nhớ có đủ size chứa shellcode không bằng lệnh: 
+
+dd <Địa chỉ bắt đầu muốn ghi viết shellcode> + <Size shellcode (có thể là 300-400)>
+
+# Nếu output trả về vẫn là 1 vùng chứa bytes rỗng (00000000) thì nghĩa là đủ size dùng được.
 ```
 
-
 B6: Tìm ROP gadgets để vượt qua DEP \
+[Cách xây dựng ROP](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/H%C6%B0%E1%BB%9Bng%20d%E1%BA%ABn/X%C3%A2y%20d%E1%BB%B1ng%20ROP.MD)
+
 B7: Xây dựng stack dùng ROP gadget \
 B8: Tạo shellcode thủ công
