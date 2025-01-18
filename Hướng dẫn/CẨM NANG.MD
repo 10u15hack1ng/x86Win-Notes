@@ -1,4 +1,4 @@
-# CẨM NANG ĐI THI
+# KINH NGHIỆM ĐI THI
 
 ## Lưu ý khi thi
 Thi sẽ gồm 3 máy: Máy Kali của mình, máy Debug của hãng, và máy để khai thác. \
