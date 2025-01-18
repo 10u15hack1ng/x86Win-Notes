@@ -42,8 +42,8 @@ Sau khi xác định được thanh ghi thì tìm [gadget đẩy giá trị](htt
 
 
 ## Tìm vị trí của pointer và đưa nó về đầu stack mẫu
-Sử dụng WinDBG để xác định vị trí của esp lúc xảy ra overflow. Khi đó con trỏ sẽ đang nằm giữa stack mẫu của chúng ta.
-Sử dụng các gadget để di chuyển con trỏ về phía đầu stack (Trước AAAA). 
+Sử dụng WinDBG để xác định vị trí của esp lúc xảy ra overflow. Khi đó con trỏ sẽ đang nằm giữa stack mẫu của chúng ta. \
+Sử dụng các gadget để di chuyển con trỏ về phía đầu stack (Trước AAAA). \
 Mục tiêu là sẽ tuần tự ghi đè các giá trị tương ứng lên các tham số trên stack.
 
 
@@ -82,8 +82,8 @@ dds esi L4
 ```
 
 ## Trả lại con trỏ về đầu stack và khôi phục esp
-Sau khi đã xây dựng xong stack với những giá trị đúng, ta sẽ dùng các gadget để lùi con trỏ (hiện đang lưu trên thanh ghi đã chọn từ trước) lại về trước stack.
-Khi con trỏ đã về đầu stack thì chúng ta sẽ dùng các gadget tương tự như ở bước lưu lại thanh ghi esp để trả lại giá trị của con trỏ về esp.
+Sau khi đã xây dựng xong stack với những giá trị đúng, ta sẽ dùng các gadget để lùi con trỏ (hiện đang lưu trên thanh ghi đã chọn từ trước) lại về trước stack. \
+Khi con trỏ đã về đầu stack thì chúng ta sẽ dùng các gadget tương tự như ở bước lưu lại thanh ghi esp để trả lại giá trị của con trỏ về esp. \
 Có thể sử dụng lệnh `dds esp` để kiểm tra stack đã chứa những giá trị đúng ở bước này.
 
 
