@@ -24,5 +24,8 @@ parameter5 = b"GGGG"              # *lpNumberOfBytesWritten   # Có thể đặt
 ## Lưu lại thanh ghi esp
 Chúng ta sẽ phải tìm một thanh ghi có ROP gadget mà cho phép chúng ta lưu được giá trị vào địa chỉ bất kì dựa trên thanh ghi đó.
 Về cơ bản, chúng ta sẽ cần 1 lệnh tương tự `mov dword [esi], eax ; ret ;`
+Sau khi xác định được thanh ghi thì tìm [gadget](https://github.com/Cl0wnK1n9/ShellcodeTemplate-windowx86/blob/main/DEP%20bypass%20note/saveESP.md) để lưu lại esp lên.
+```
+
 
 ## Tìm vị trí của pointer và đưa nó về đầu stack mẫu
