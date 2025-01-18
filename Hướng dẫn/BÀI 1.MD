@@ -112,9 +112,28 @@ rp_win_x86.exe -f "<Đường dẫn đến moduled" -r 5 > rop.txt
 [Cách xây dựng ROP](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/H%C6%B0%E1%BB%9Bng%20d%E1%BA%ABn/X%C3%A2y%20d%E1%BB%B1ng%20ROP.MD)
 
 ## B8: Tạo shellcode thủ công
-Dựa trên [shellcode mẫu trong sách](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/Custom%20Shellcode/shellcode_NO_CHANGE_PLEASE.py) và chỉnh sửa tương ứng. 
+Dựa trên [shellcode mẫu trong sách](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/Custom%20Shellcode/shellcode_NO_CHANGE_PLEASE.py) và chỉnh sửa tương ứng.  
+Khi thực thi đoạn code trên, trong terminal sẽ sinh ra 1 đoạn shellcode. Copy thẳng shellcode đó vào trong code.  
+
 ### 8.1 Sửa địa chỉ IP thành IP của máy kali
-[Tool đổi IP sang hex](https://www.browserling.com/tools/ip-to-hex) 
+[Tool đổi IP sang hex](https://www.browserling.com/tools/ip-to-hex)  
 Lưu ý đảo lại chiều của các bytes. \
 VD trên tool: `127.0.0.1 => 7f.00.00.01 (0x7f000001)` \
 Trong code phải đảo thành: `0x01000000f7`
+
+### 8.2 Chỉnh sửa lệnh loại bỏ badc characters
+[Tool đổi assembly sang opcode](https://defuse.ca/online-x86-assembler.htm)  
+Các lệnh gốc của shellcode mẫu sẽ có những opcode có bad characters.  
+Dựa trên kết quả debug trong WinDBG để tìm điểm xảy ra crash hoặc có thể convert thủ công từng câu lệnh. Từ đó có thể biết câu lệnh cần thay thế.  
+Thay thế 1 câu lệnh có bad character bằng 2 hoặc 3 câu lệnh thực hiện chức năng tương ứng.
+```
+# Giả sử ta có 0x05 là bad character và có câu lệnh:
+add    eax, 0x12345678      # Opcode:   \x05 \x78 \x56 \x34 \x12 
+
+# Ta có thể thay bằng 2 câu lệnh để đưa ra kết quả tương tự mà không bị dính bad character:
+mov    ecx, 0x12345678      # Opcode:   \xb9 \x78 \x56 \x34 \x12
+add    eax, ecx             # Opcode:   \x01 \xc8                  
+```
+
+
+
