@@ -39,7 +39,7 @@ msf exploit(handler) > set ExitOnSession false
 msf exploit(handler) > exploit -j
 ```
 
-Tham khảo cách viết: [Shellcode trong sách](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/Custom%20Shellcode/shellcode_NO_CHANGE_PLEASE.)  
+Tham khảo cách viết: [Shellcode trong sách](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/Custom%20Shellcode/shellcode_NO_CHANGE_PLEASE.py)  
 
 Trong quá trình debug, có thể dùng lệnh `dds <địa chỉ>` để kiểm tra các hàm đã được lưu đúng chưa.  
 Nếu các hàm đã được lưu đúng thì sẽ hiện tên hàm ở trong output.
