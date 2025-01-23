@@ -58,6 +58,7 @@ session -l
 sessions -i 1
 [*] Starting interaction with 1...
 
+meterpreter > 
 ```
 
 Tham khảo cách viết: [Shellcode trong sách](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/Custom%20Shellcode/shellcode_NO_CHANGE_PLEASE.py)  
