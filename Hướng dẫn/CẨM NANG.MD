@@ -16,10 +16,11 @@ B7: Xây dựng stack dùng ROP gadget \
 B8: Tạo shellcode thủ công
 
 ### [Bài 2](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/H%C6%B0%E1%BB%9Bng%20d%E1%BA%ABn/B%C3%80I%202.MD)
+
 B1: Xác định các hàm cần sử dụng theo yêu cầu của đề bài \
 B2: Load các thư viện và các hàm cần thiết \
 B3: Xây dựng địa chỉ dựa trên hàm yêu cầu \
 B4: Thiết lập và kiểm tra server giao tiếp với máy kali \
-B5: Test script
+B5: Test script bằng cách chạy trên máy debug 
 
 
