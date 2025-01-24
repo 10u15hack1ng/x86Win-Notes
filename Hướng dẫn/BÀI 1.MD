@@ -119,7 +119,7 @@ Lưu ý đảo lại chiều của các bytes. \
 VD trên tool: `127.0.0.1 => 7f.00.00.01 (0x7f000001)` \
 Trong code phải đảo thành: `0x01000000f7`
 
-### 8.2 Chỉnh sửa lệnh loại bỏ badc characters
+### 8.2 Chỉnh sửa lệnh loại bỏ bad characters
 [Tool đổi assembly sang opcode](https://defuse.ca/online-x86-assembler.htm)  
 Các lệnh gốc của shellcode mẫu sẽ có những opcode có bad characters.  
 Dựa trên kết quả debug trong WinDBG để tìm điểm xảy ra crash hoặc có thể convert thủ công từng câu lệnh. Từ đó có thể biết câu lệnh cần thay thế.  
@@ -131,6 +131,11 @@ add    eax, 0x12345678      # Opcode:   \x05 \x78 \x56 \x34 \x12
 # Ta có thể thay bằng 2 câu lệnh để đưa ra kết quả tương tự mà không bị dính bad character:
 mov    ecx, 0x12345678      # Opcode:   \xb9 \x78 \x56 \x34 \x12
 add    eax, ecx             # Opcode:   \x01 \xc8                  
+```
+
+Thực thi listener bằng lệnh 
+```
+ncat -lnvp <Port>
 ```
 
 
